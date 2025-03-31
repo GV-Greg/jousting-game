@@ -1,10 +1,10 @@
-FROM node:18
+FROM node:20-slim
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 
-# Étape 4 : Exécuter le script d'écriture d'un fichier txt qui répertorie la structure du projet 
-RUN node generateStructure.js
+# Génération de la structure du projet
+RUN node generateStructureProject.js
 
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
