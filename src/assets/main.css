@@ -1,10 +1,8 @@
 @import "tailwindcss";
 @import './base.css';
 
-#app {
-  margin: 0 auto;
-  padding: 0;
-}
+/* Polices personnalisées */
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 
 @layer base {
   :root {
@@ -17,14 +15,134 @@
     font-family: 'MedievalSharp', cursive;
     color: var(--medieval-gold);
   }
+
+  body {
+    background-color: #111827;
+    color: #f3f4f6;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  #app {
+    width: 100%;
+    margin: 0 auto;
+    font-weight: normal;
+  }
+}
+
+@layer components {
+  .font-medieval {
+    font-family: 'MedievalSharp', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  .btn-medieval {
+    background-color: var(--medieval-red);
+    color: #ffffff;
+    border: 2px solid #a52a2a;
+    padding: 0.75rem 1.5rem;
+    font-family: 'MedievalSharp', cursive;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-medieval:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-medieval:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn-medieval-primary {
+    background-color: var(--medieval-red);
+    border-color: #a52a2a;
+  }
+
+  .btn-medieval-secondary {
+    background-color: var(--medieval-brown);
+    border-color: #6f4e37;
+  }
+
+  .btn-medieval-tertiary {
+    background-color: var(--medieval-gray);
+    border-color: #5a6a73;
+  }
+
+  /* .scroll-bg {
+    background-image: url('/src/assets/scroll.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 2rem;
+  }
+
+  .wood-bg {
+    background-image: url('/src/assets/wood.png');
+    background-size: cover;
+  } */
+
+  /* Ces classes utilisent des dégradés pour simuler les textures
+    en attendant que vous ayez les images réelles */
+    .scroll-bg {
+    background-color: #f5e9d0;
+    background-image: linear-gradient(to right, rgba(222, 184, 135, 0.3), rgba(245, 222, 179, 0.1), rgba(222, 184, 135, 0.3));
+    border: 8px solid #a67c52;
+    border-radius: 8px;
+    padding: 2rem;
+  }
+
+  .wood-bg {
+    background-color: #8b5a2b;
+    background-image: linear-gradient(90deg, rgba(139, 90, 43, 0.8) 0%, rgba(165, 113, 67, 0.4) 20%, rgba(139, 90, 43, 0.8) 40%, rgba(165, 113, 67, 0.4) 60%, rgba(139, 90, 43, 0.8) 80%, rgba(165, 113, 67, 0.4) 100%);
+  }
 }
 
 @layer utilities {
   .bg-medieval-gold {
     background-color: var(--medieval-gold);
   }
+  
+  .bg-medieval-red {
+    background-color: var(--medieval-red);
+  }
+  
+  .bg-medieval-blue {
+    background-color: var(--medieval-blue);
+  }
+  
+  .text-medieval-gold {
+    color: var(--medieval-gold);
+  }
+  
+  .text-medieval-red {
+    color: var(--medieval-red);
+  }
+  
   .text-medieval-blue {
     color: var(--medieval-blue);
   }
+
+  .fade-in {
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
 }
 
+/* Animations globales */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}

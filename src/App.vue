@@ -15,19 +15,21 @@
 </script>
 
 <template>
-  <div id="app">
+  <div id="app" class="relative min-h-screen">
     <router-view v-slot="{ Component }">
       <transition name="page-transition" mode="out-in">
         <component :is="Component" />
       </transition>
     </router-view>
+
+    <!-- Signature/crédit -->
+    <div class="absolute bottom-4 left-0 right-0 text-center text-white text-opacity-60 text-sm z-10">
+      <p>© 2025 - Le Jeu de Joute Médiévale</p>
+    </div>
   </div>
 </template>
 
 <style scoped>
-  /* Styles spécifiques au composant App.vue */
-  /* Les styles de base sont déjà importés via main.js -> main.css -> base.css */
-
   /* Animation pour les transitions entre les pages */
   .page-transition-enter-active,
   .page-transition-leave-active {

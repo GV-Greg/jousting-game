@@ -62,7 +62,8 @@
 │   ├── router
 │   │   └── index.js
 │   ├── stores
-│   │   └── gameStore.js
+│   │   ├── gameStore.js
+│   │   └── settingsStore.js
 │   ├── views
 │   │   ├── CharacterSelect.vue
 │   │   ├── Game.vue
