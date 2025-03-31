@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import './base.css';
+
+#app {
+  margin: 0 auto;
+  padding: 0;
+}
+
+@layer base {
+  :root {
+    --medieval-gold: #D4AF37;
+    --medieval-red: #8B0000;
+    --medieval-blue: #003366;
+  }
+
+  h1 {
+    font-family: 'MedievalSharp', cursive;
+    color: var(--medieval-gold);
+  }
+}
+
+@layer utilities {
+  .bg-medieval-gold {
+    background-color: var(--medieval-gold);
+  }
+  .text-medieval-blue {
+    color: var(--medieval-blue);
+  }
+}
+

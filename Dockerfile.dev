@@ -1,0 +1,10 @@
+FROM node:18
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+# Étape 4 : Exécuter le script d'écriture d'un fichier txt qui répertorie la structure du projet 
+RUN node generateStructure.js
+
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

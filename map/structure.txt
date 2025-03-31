@@ -1,0 +1,77 @@
+├── .editorconfig
+├── .gitattributes
+├── .gitignore
+├── .prettierrc.json
+├── docker-compose.yml
+├── Dockerfile.dev
+├── eslint.config.js
+├── index.html
+├── jsconfig.json
+├── package-lock.json
+├── package.json
+├── public
+│   └── favicon.ico
+├── README.md
+├── src
+│   ├── App.vue
+│   ├── assets
+│   │   ├── base.css
+│   │   ├── main.css
+│   │   └── sprites
+│   │       ├── attack
+│   │       │   ├── Knight_attack10.png
+│   │       │   ├── Knight_attack7.png
+│   │       │   ├── Knight_attack8.png
+│   │       │   └── Knight_attack9.png
+│   │       ├── death
+│   │       ├── gallop
+│   │       │   ├── Knight_gallop1.png
+│   │       │   ├── Knight_gallop2.png
+│   │       │   ├── Knight_gallop3.png
+│   │       │   ├── Knight_gallop4.png
+│   │       │   └── Knight_gallop5.png
+│   │       ├── standing
+│   │       │   ├── Knight_standing1.png
+│   │       │   ├── Knight_standing2.png
+│   │       │   ├── Knight_standing3.png
+│   │       │   ├── Knight_standing4.png
+│   │       │   ├── Knight_standing5.png
+│   │       │   ├── Knight_standing6.png
+│   │       │   ├── Knight_standing7.png
+│   │       │   ├── Knight_standing8.png
+│   │       │   └── Knight_standing9.png
+│   │       └── walk
+│   │           ├── Knight_walk1.png
+│   │           ├── Knight_walk2.png
+│   │           ├── Knight_walk3.png
+│   │           ├── Knight_walk4.png
+│   │           ├── Knight_walk5.png
+│   │           ├── Knight_walk6.png
+│   │           ├── Knight_walk7.png
+│   │           └── Knight_walk8.png
+│   ├── components
+│   │   ├── animations
+│   │   │   └── AnimatedSprite.vue
+│   │   ├── icons
+│   │   │   ├── IconCommunity.vue
+│   │   │   ├── IconDocumentation.vue
+│   │   │   ├── IconEcosystem.vue
+│   │   │   ├── IconSupport.vue
+│   │   │   └── IconTooling.vue
+│   │   ├── Interface.vue
+│   │   ├── Jouster.vue
+│   │   ├── Menu.vue
+│   │   ├── Tiltyard.vue
+│   │   └── __tests__
+│   │       └── HelloWorld.spec.js
+│   ├── main.js
+│   ├── router
+│   │   └── index.js
+│   ├── stores
+│   └── views
+│       ├── CharacterSelection.vue
+│       ├── Game.vue
+│       ├── Home.vue
+│       └── Rules.vue
+├── vite.config.js
+└── vitest.config.js
