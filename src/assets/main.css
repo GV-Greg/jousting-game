@@ -31,6 +31,10 @@
     margin: 0 auto;
     font-weight: normal;
   }
+
+  .cursor-pointer {
+    cursor: pointer;
+  }
 }
 
 @layer components {
@@ -39,49 +43,89 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
-  .btn-medieval {
-    background-color: var(--medieval-red);
-    color: #ffffff;
-    border: 2px solid #a52a2a;
-    padding: 0.75rem 1.5rem;
-    font-family: 'MedievalSharp', cursive;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
+  .icon {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
   }
 
-  .btn-medieval:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  .med-btn {
+    @apply px-5 py-2.5 rounded-xl cursor-pointer transition-all duration-300 ease-in-out flex items-center justify-center;
+    color: #f4e5c3; /* A parchment-like off-white */
+    font-family: 'Goudy Bookletter 1911', serif; /* A font with an old-style feel */
+    font-size: 18px;
   }
 
-  .btn-medieval:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  .med-btn:active {
+    box-shadow: inset 1px 1px 2px 0px rgba(0, 0, 0, 0.5); /* An inset shadow for a pressed effect */
+    @apply transform translate-y-0.5;
+  }
+
+  /* Classes de couleurs personnalisées s'inspirant des styles médiévaux */
+  .med-btn-primary {
+    background-color: #8B0000; /* medieval-red */
+    border-color: #a52a2a;
+    text-shadow: 1px 1px 0px #6b0000;
+    box-shadow: 2px 2px 0px #6b0000;
+  }
+
+  .med-btn-primary:hover {
+    background-color: #a52a2a;
+  }
+
+  .med-btn-secondary {
+    background-color: #654321; /* medieval-brown */
+    border-color: #6f4e37;
+    text-shadow: 1px 1px 0px #4a3219;
+    box-shadow: 2px 2px 0px #4a3219;
+  }
+
+  .med-btn-secondary:hover {
+    background-color: #7d5427;
+  }
+
+  .med-btn-tertiary {
+    background-color: #708090; /* medieval-gray */
+    border-color: #5a6a73;
+    text-shadow: 1px 1px 0px #566a79;
+    box-shadow: 2px 2px 0px #566a79;
+  }
+
+  .med-btn-tertiary:hover {
+    background-color: #8999a6;
+  }
+
+  /* Classes de couleurs personnalisées */
+  .med-btn-blue {
+    background-color: #3b5998;
+    text-shadow: 1px 1px 0px #2d4373;
+    box-shadow: 2px 2px 0px #2d4373;
+  }
+
+  .med-btn-blue:hover {
+    background-color: #4c70ba;
+  }
+
+  .med-btn-green {
+    background-color: #4b8e48;
+    text-shadow: 1px 1px 0px #356333;
+    box-shadow: 2px 2px 0px #356333;
+  }
+
+  .med-btn-green:hover {
+    background-color: #5aab57;
+  }
+
+  .med-btn-red {
+    background-color: #b64b4b;
+    text-shadow: 1px 1px 0px #933a3a;
+    box-shadow: 2px 2px 0px #933a3a;
+  }
+
+  .med-btn-red:hover {
+    background-color: #cc5b5b;
   }
   
-  .btn-medieval-primary {
-    background-color: var(--medieval-red);
-    border-color: #a52a2a;
-  }
-
-  .btn-medieval-secondary {
-    background-color: var(--medieval-brown);
-    border-color: #6f4e37;
-  }
-
-  .btn-medieval-tertiary {
-    background-color: var(--medieval-gray);
-    border-color: #5a6a73;
-  }
-
   /* Classes pour le panneau d'options */
   .medieval-panel {
     position: fixed;

@@ -2,6 +2,7 @@
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import { useSettingsStore } from '@/stores/settingsStore';
+  import MedButton from '@/components/Button.vue';
 
   const router = useRouter();
   const settingsStore = useSettingsStore();
@@ -44,18 +45,12 @@
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 w-full max-w-[350px] z-10">
-    <button @click="startGame" class="btn-medieval btn-medieval-primary">
-      <v-icon name="gi-swordman" class="text-xl" /> Commencer
-    </button>
+  <div class="flex flex-col gap-4 w-full max-w-[250px] z-10">
+    <MedButton text="Commencer" color="primary" icon="gi-swordman" @click="startGame" className="w-full" />
 
-    <button @click="showRules" class="btn-medieval btn-medieval-secondary">
-      <v-icon name="gi-scroll-unfurled" class="text-xl" /> Règles
-    </button>
+    <MedButton text="Règles" color="secondary" icon="gi-scroll-unfurled" @click="showRules" className="w-full" />
 
-    <button @click="toggleOptions" class="btn-medieval btn-medieval-tertiary">
-      <v-icon name="gi-cog" class="text-xl" /> Options
-    </button>
+    <MedButton text="Options" color="tertiary" icon="gi-cog" @click="toggleOptions" className="w-full" />
   </div>
 
  <!-- Panneau d'options -->
@@ -66,14 +61,10 @@
 
     <div class="flex justify-between items-center my-6">
       <label class="text-lg font-medieval">Sons</label>
-      <button @click="settingsStore.toggleSound()" class="medieval-toggle" :class="{ 'active': settingsStore.soundEnabled }">
-        {{ settingsStore.soundEnabled ? 'Activés' : 'Désactivés' }}
-      </button>
+      <MedButton :text="settingsStore.soundEnabled ? 'Activés' : 'Désactivés'" :color="settingsStore.soundEnabled ? 'green' : 'red'" @click="settingsStore.toggleSound()" className="text-sm" />
     </div>
 
-    <button @click="toggleOptions" class="medieval-toggle">
-      Fermer
-    </button>
+    <MedButton text="Fermer" color="tertiary" @click="toggleOptions" className="mt-4" />
   </div>
 </template>
 
