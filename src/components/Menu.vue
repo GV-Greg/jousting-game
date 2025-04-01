@@ -46,11 +46,11 @@
 
 <template>
   <div class="flex flex-col gap-4 w-full max-w-[250px] z-10">
-    <MedButton text="Commencer" color="primary" icon="gi-swordman" @click="startGame" className="w-full" />
+    <MedButton text="Commencer" color="gold" icon="gi-swordman" @click="startGame" className="w-full" />
 
-    <MedButton text="Règles" color="secondary" icon="gi-scroll-unfurled" @click="showRules" className="w-full" />
+    <MedButton text="Règles" color="red" icon="gi-scroll-unfurled" @click="showRules" className="w-full" />
 
-    <MedButton text="Options" color="tertiary" icon="gi-cog" @click="toggleOptions" className="w-full" />
+    <MedButton text="Options" color="blue" icon="gi-cog" @click="toggleOptions" className="w-full" />
   </div>
 
  <!-- Panneau d'options -->
@@ -61,10 +61,10 @@
 
     <div class="flex justify-between items-center my-6">
       <label class="text-lg font-medieval">Sons</label>
-      <MedButton :text="settingsStore.soundEnabled ? 'Activés' : 'Désactivés'" :color="settingsStore.soundEnabled ? 'green' : 'red'" @click="settingsStore.toggleSound()" className="text-sm" />
+      <MedButton :text="settingsStore.soundEnabled ? 'Activés' : 'Désactivés'" :color="settingsStore.soundEnabled ? 'success' : 'danger'" @click="settingsStore.toggleSound()" className="text-sm" />
     </div>
 
-    <MedButton text="Fermer" color="tertiary" @click="toggleOptions" className="mt-4" />
+    <MedButton text="Fermer" color="info" @click="toggleOptions" className="mt-4" />
   </div>
 </template>
 

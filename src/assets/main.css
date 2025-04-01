@@ -4,17 +4,35 @@
 /* Polices personnalisées */
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 
+/* Structure des layers:
+ * - base: styles fondamentaux et réinitialisations
+ * - components: composants réutilisables
+ * - utilities: classes utilitaires pour des ajustements spécifiques
+ */
+
 @layer base {
   :root {
-    --medieval-gold: #D4AF37;
+    --medieval-gold: #c09c27;
     --medieval-red: #8B0000;
     --medieval-blue: #003366;
     --medieval-brown: #8B4513;
     --medieval-gray: #2F4F4F;
+    --font-medieval: 'MedievalSharp', cursive;
+  }
+
+  html, body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 
+      Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-medieval);
   }
 
   h1 {
-    font-family: 'MedievalSharp', cursive;
     color: var(--medieval-gold);
   }
 
@@ -39,7 +57,7 @@
 
 @layer components {
   .font-medieval {
-    font-family: 'MedievalSharp', cursive;
+    font-family: var(--font-medieval);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
@@ -50,109 +68,143 @@
   }
 
   .med-btn {
-    @apply px-5 py-2.5 rounded-xl cursor-pointer transition-all duration-300 ease-in-out flex items-center justify-center;
+    @apply flex items-center justify-center px-4 py-2 rounded-lg border-2 transition-all duration-300 cursor-pointer text-base relative shadow-md;
     color: #f4e5c3; /* A parchment-like off-white */
     font-family: 'Goudy Bookletter 1911', serif; /* A font with an old-style feel */
-    font-size: 18px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    transform-style: preserve-3d;
+  }
+
+  .med-btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: inherit;
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, rgba(255,255,255,0.1) 100%);
+    transform: translateZ(-1px);
+    pointer-events: none;
+  }
+
+  .med-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
   }
 
   .med-btn:active {
-    box-shadow: inset 1px 1px 2px 0px rgba(0, 0, 0, 0.5); /* An inset shadow for a pressed effect */
+    filter: brightness(0.9);
     @apply transform translate-y-0.5;
   }
 
   /* Classes de couleurs personnalisées s'inspirant des styles médiévaux */
-  .med-btn-primary {
-    background-color: #8B0000; /* medieval-red */
-    border-color: #a52a2a;
-    text-shadow: 1px 1px 0px #6b0000;
-    box-shadow: 2px 2px 0px #6b0000;
+  .med-btn-info {
+    @apply bg-blue-700 text-white border-blue-600;
   }
 
-  .med-btn-primary:hover {
-    background-color: #a52a2a;
+  .med-btn-success {
+    @apply bg-green-700 text-white border-green-600;
   }
 
-  .med-btn-secondary {
-    background-color: #654321; /* medieval-brown */
-    border-color: #6f4e37;
-    text-shadow: 1px 1px 0px #4a3219;
-    box-shadow: 2px 2px 0px #4a3219;
-  }
-
-  .med-btn-secondary:hover {
-    background-color: #7d5427;
-  }
-
-  .med-btn-tertiary {
-    background-color: #708090; /* medieval-gray */
-    border-color: #5a6a73;
-    text-shadow: 1px 1px 0px #566a79;
-    box-shadow: 2px 2px 0px #566a79;
-  }
-
-  .med-btn-tertiary:hover {
-    background-color: #8999a6;
-  }
-
-  /* Classes de couleurs personnalisées */
-  .med-btn-blue {
-    background-color: #3b5998;
-    text-shadow: 1px 1px 0px #2d4373;
-    box-shadow: 2px 2px 0px #2d4373;
-  }
-
-  .med-btn-blue:hover {
-    background-color: #4c70ba;
-  }
-
-  .med-btn-green {
-    background-color: #4b8e48;
-    text-shadow: 1px 1px 0px #356333;
-    box-shadow: 2px 2px 0px #356333;
-  }
-
-  .med-btn-green:hover {
-    background-color: #5aab57;
-  }
-
-  .med-btn-red {
-    background-color: #b64b4b;
-    text-shadow: 1px 1px 0px #933a3a;
-    box-shadow: 2px 2px 0px #933a3a;
-  }
-
-  .med-btn-red:hover {
-    background-color: #cc5b5b;
+  .med-btn-danger {
+    @apply bg-red-700 text-white border-red-600;
   }
   
-  /* Classes pour le panneau d'options */
-  .medieval-panel {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 400px;
-    background-color: #2A2A2A;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.1));
-    border: 4px solid var(--medieval-gold);
-    border-radius: 8px;
-    padding: 24px;
-    z-index: 50;
-    color: white;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+  .med-btn-gold {
+    background-color: var(--medieval-gold);
+    text-shadow: 1px 1px 0px #a67c52;
+    box-shadow: 2px 2px 0px #a67c52;
+  }
+  
+  .med-btn-red {
+    background-color: var(--medieval-red);
+    text-shadow: 1px 1px 0px #a52a2a;
+    box-shadow: 2px 2px 0px #a52a2a;
+  }
+  .med-btn-blue {
+    background-color: var(--medieval-blue);
+    text-shadow: 1px 1px 0px #003366;
+    box-shadow: 2px 2px 0px #003366;
   }
 
+  .med-btn-brown {
+    background-color: var(--medieval-brown);
+    text-shadow: 1px 1px 0px #8b4513;
+    box-shadow: 2px 2px 0px #8b4513;
+  }
+
+  .med-btn-gray {
+    background-color: var(--medieval-gray);
+    text-shadow: 1px 1px 0px #2f4f4f;
+    box-shadow: 2px 2px 0px #2f4f4f;
+  }
+
+  .med-btn-yellow {
+    @apply bg-yellow-700 text-white border-yellow-600;
+  }
+
+  .med-btn-purple {
+    @apply bg-purple-700 text-white border-purple-600;
+  }
+
+  .med-btn-orange {
+    @apply bg-orange-700 text-white border-orange-600;
+  }
+
+  .med-btn-pink {
+    @apply bg-pink-700 text-white border-pink-600;
+  }
+
+  .med-btn-rose {
+    @apply bg-rose-700 text-white border-rose-600;
+  }
+
+  .med-btn-indigo {
+    @apply bg-indigo-700 text-white border-indigo-600;
+  }
+
+  .med-btn-teal {
+    @apply bg-teal-700 text-white border-teal-600;
+  }
+
+  .med-btn-emerald {
+    @apply bg-emerald-700 text-white border-emerald-600;
+  }
+
+  .med-btn-lime {
+    @apply bg-lime-700 text-white border-lime-600;
+  }
+
+  .med-btn-cyan {
+    @apply bg-cyan-700 text-white border-cyan-600;
+  }
+
+  .med-btn-slate {
+    @apply bg-slate-700 text-white border-slate-600;
+  }
+
+  .med-btn-stone {
+    @apply bg-stone-700 text-white border-stone-600;
+  }
+
+  .med-btn-zinc {
+    @apply bg-zinc-700 text-white border-zinc-600;
+  }
+
+  .med-btn-neutral {
+    @apply bg-neutral-700 text-white border-neutral-600;
+  }
+
+  /* Classes pour le panneau d'options */
+  .medieval-panel {
+    @apply bg-gradient-to-b from-stone-800 to-stone-900 border-4 border-amber-900 p-6 rounded-lg shadow-lg z-20 absolute top-1/2 left-1/2
+          transform -translate-x-1/2 -translate-y-1/2 max-w-md w-full;
+    }
+
   .medieval-title {
-    font-family: 'MedievalSharp', cursive;
-    text-align: center;
-    font-size: 1.5rem;
-    color: var(--medieval-gold);
-    border-bottom: 2px solid var(--medieval-gold);
-    padding-bottom: 8px;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    font-family: var(--font-medieval);
+    @apply text-2xl text-amber-400 text-center mb-4 border-b-2 border-amber-900 pb-2;
   }
 
   .medieval-toggle {
@@ -161,7 +213,7 @@
     border: 1px solid #666;
     color: white;
     transition: all 0.3s ease;
-    font-family: 'MedievalSharp', cursive;
+    font-family: var(--font-medieval);
   }
 
   .medieval-toggle.active {
@@ -176,12 +228,44 @@
     background-color: #444;
     border: 1px solid #666;
     color: white;
-    font-family: 'MedievalSharp', cursive;
+    font-family: var(--font-medieval);
     transition: background-color 0.2s;
   }
 
   .medieval-close:hover {
     background-color: #555;
+  }
+
+  /* Cartes de personnages */
+  .knight-card {
+    @apply bg-gray-800 p-6 rounded-lg cursor-pointer border-4 transition-all duration-300 transform hover:scale-105 relative overflow-hidden;
+  }
+
+  .knight-card:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+  }
+
+  .border-red-500 {
+    border-color: rgb(239, 68, 68);
+  }
+
+  .border-blue-500 {
+    border-color: rgb(59, 130, 246);
+  }
+
+  .shadow-red-500\/50 {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+  }
+
+  .shadow-blue-500\/50 {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
   }
 
   /* .scroll-bg {
@@ -198,7 +282,7 @@
 
   /* Ces classes utilisent des dégradés pour simuler les textures
     en attendant que vous ayez les images réelles */
-    .scroll-bg {
+  .scroll-bg {
     background-color: #f5e9d0;
     background-image: linear-gradient(to right, rgba(222, 184, 135, 0.3), rgba(245, 222, 179, 0.1), rgba(222, 184, 135, 0.3));
     border: 8px solid #a67c52;
@@ -224,7 +308,15 @@
   .bg-medieval-blue {
     background-color: var(--medieval-blue);
   }
+
+  .bg-medieval-brown {
+    background-color: var(--medieval-brown);
+  }
   
+  .bg-medieval-gray {
+    background-color: var(--medieval-gray);
+  }
+
   .text-medieval-gold {
     color: var(--medieval-gold);
   }
@@ -237,23 +329,47 @@
     color: var(--medieval-blue);
   }
 
+  .text-medieval-brown {
+    color: var(--medieval-brown);
+  }
+
+  .text-medieval-gray {
+    color: var(--medieval-gray);
+  }
+
+  /* Animation pour les transitions */
   .fade-in {
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out forwards;
   }
 
   .float {
     animation: float 3s ease-in-out infinite;
   }
+
+  .animated-error {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  }
+
+  /* Utilitaires d'effets */
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
 }
 
 /* Animations globales */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
 }

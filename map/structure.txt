@@ -43,17 +43,10 @@
 │   │   │   └── HelloWorld.spec.js
 │   │   ├── animations
 │   │   │   └── AnimatedSprite.vue
-│   │   ├── icons
-│   │   │   ├── IconCommunity.vue
-│   │   │   ├── IconDocumentation.vue
-│   │   │   ├── IconEcosystem.vue
-│   │   │   ├── IconSupport.vue
-│   │   │   └── IconTooling.vue
-│   │   ├── Arena.vue
-│   │   ├── Interface.vue
+│   │   ├── Button.vue
+│   │   ├── Icon.vue
 │   │   ├── Jouster.vue
-│   │   ├── Menu.vue
-│   │   └── Tiltyard.vue
+│   │   └── Menu.vue
 │   ├── composables
 │   │   └── useGameState.js
 │   ├── intelligence

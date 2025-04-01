@@ -7,13 +7,13 @@ import router from './router';
 
 import { OhVueIcon, addIcons } from 'oh-vue-icons';
 import {
-  GiSwordman, GiScrollUnfurled, GiCog,
+  GiSwordman, GiScrollUnfurled, GiCog, BiArrowLeft, GiCheckMark, GiCrossMark
   // Ajoutez d'autres icônes que vous pourriez utiliser
 } from 'oh-vue-icons/icons';
 
 // Enregistrer les icônes que vous utiliserez
 addIcons(
-  GiSwordman, GiScrollUnfurled, GiCog
+  GiSwordman, GiScrollUnfurled, GiCog, BiArrowLeft, GiCheckMark, GiCrossMark
 );
 
 const app = createApp(App);
