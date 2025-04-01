@@ -42,7 +42,7 @@
         <span class="letter inline-block">N</span>
         <span class="letter inline-block">G</span>
       </h1>
-      <p class="text-xl text-white font-medieval">Un jeu de joute médiévale épique</p>
+      <p class="text-xl text-white font-medieval">Un jeu de joute médiévale équestre</p>
     </div>
 
     <Menu />
