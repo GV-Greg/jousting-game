@@ -15,14 +15,12 @@
     // Animation (none, spin, pulse, flip)
     animation: {
       type: String,
-      default: '',
-      validator: (value) => ['', 'spin', 'pulse', 'flip'].includes(value)
+      default: ''
     },
     // Vitesse d'animation (normal, slow, fast)
     speed: {
       type: String,
-      default: 'normal',
-      validator: (value) => ['normal', 'slow', 'fast'].includes(value)
+      default: 'normal'
     },
     // Animation au survol
     hover: {
@@ -32,8 +30,7 @@
     // Retournement (horizontal, vertical)
     flip: {
       type: String,
-      default: '',
-      validator: (value) => ['', 'horizontal', 'vertical', 'both'].includes(value)
+      default: ''
     },
     // Remplissage de l'icône
     fill: {
@@ -77,10 +74,13 @@
 
     return style;
   });
-
 </script>
 
 <template>
-  <v-icon :name="name" :scale="scale" :animation="animation" :speed="speed" :hover="hover" :flip="flip" :fill="fill"
-          :label="label" :title="title" :style="customStyle" :class="['icon', className]" />
+  <v-icon
+    :name="name"
+    :scale="scale" 
+    :style="customStyle"
+    :class="['icon', className]"
+  />
 </template>

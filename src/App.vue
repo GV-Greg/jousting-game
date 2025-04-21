@@ -8,7 +8,7 @@
 
   // Actions d'initialisation au chargement de l'application
   onMounted(() => {
-    console.log('Application de joute médiévale chargée')
+    console.log('App chargée')
 
     // Préchargement des ressources ou autres initialisations globales peuvent être ajoutés ici
   })
@@ -24,7 +24,7 @@
 
     <!-- Signature/crédit -->
     <div class="absolute bottom-4 left-0 right-0 text-center text-white text-opacity-60 text-sm z-10">
-      <p>© 2025 - Le Jeu de Joute Médiévale</p>
+      <p>CreaCube © 2025 - jeu de Joute Médiévale</p>
     </div>
   </div>
 </template>
