@@ -1,22 +1,16 @@
 <template>
-  <div class="animated-sprite">
-    <img
-      :src="currentFrame"
-      :alt="`${state} animation`"
-      class="sprite-image"
-      :class="{ 'flip-horizontal': shouldFlip }"
-    />
+  <div class="animated-sprite" :class="{ 'flip-horizontal': flipHorizontal }">
+    <img v-if="currentFrame" :src="currentFrame" alt="sprite" class="sprite-image" />
   </div>
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted, computed } from 'vue';
+import { ref, watch, onMounted, onBeforeUnmount, computed } from 'vue'
 
 const props = defineProps({
   state: {
     type: String,
     required: true,
-    validator: (value) => ['walk', 'attack', 'death', 'gallop', 'standing'].includes(value),
   },
   frames: {
     type: Array,
@@ -29,72 +23,84 @@ const props = defineProps({
   flipHorizontal: {
     type: Boolean,
     default: false,
-  }
-});
+  },
+})
 
-// Émettre des événements
-const emit = defineEmits(['animationCompleted']);
+const emit = defineEmits(['animationCompleted'])
 
-const currentFrameIndex = ref(0);
-const currentFrame = ref('');
-const shouldFlip = computed(() => props.flipHorizontal);
+const currentFrameIndex = ref(0)
+let animationInterval = null
 
-// Animation timer
-let animationInterval = null;
+// Seule l'animation "death" ne doit pas boucler
+const shouldLoop = computed(() => {
+  return props.state !== 'death'
+})
+
+const currentFrame = computed(() => {
+  if (props.frames.length === 0) return ''
+  return props.frames[currentFrameIndex.value] || props.frames[0]
+})
 
 // Démarrer l'animation
 const startAnimation = () => {
-  if (props.frames.length === 0) return;
+  stopAnimation()
+  currentFrameIndex.value = 0
 
-  stopAnimation();
-
-  // Initialiser avec la première frame
-  currentFrameIndex.value = 0;
-  currentFrame.value = props.frames[0];
+  if (props.frames.length <= 1) return
 
   // Configurer l'intervalle d'animation
   animationInterval = setInterval(() => {
-    // Avancer à la frame suivante
-    currentFrameIndex.value = (currentFrameIndex.value + 1) % props.frames.length;
-    currentFrame.value = props.frames[currentFrameIndex.value];
+    if (currentFrameIndex.value < props.frames.length - 1) {
+      // Avancer à la frame suivante
+      currentFrameIndex.value++
+    } else {
+      // Animation terminée
+      emit('animationCompleted', props.state)
 
-    // Émettre un événement quand un cycle d'animation est terminé
-    if (currentFrameIndex.value === props.frames.length - 1) {
-      emit('animationCompleted', props.state);
+      if (shouldLoop.value) {
+        // Boucler : revenir au début
+        currentFrameIndex.value = 0
+      } else {
+        // Ne pas boucler : rester sur la dernière frame
+        stopAnimation()
+      }
     }
-  }, props.frameDuration);
-};
+  }, props.frameDuration)
+}
 
 // Arrêter l'animation
 const stopAnimation = () => {
   if (animationInterval) {
-    clearInterval(animationInterval);
-    animationInterval = null;
+    clearInterval(animationInterval)
+    animationInterval = null
   }
-};
+}
 
-// Réagir aux changements d'état ou de frames
-watch(() => [props.state, props.frames], () => {
-  if (props.frames.length > 0) {
-    // Réinitialiser l'animation avec les nouvelles frames
-    currentFrameIndex.value = 0;
-    currentFrame.value = props.frames[0];
-    startAnimation();
-  }
-}, { immediate: false });
+// Redémarrer l'animation quand l'état change
+watch(
+  () => props.state,
+  () => {
+    startAnimation()
+  },
+  { immediate: false },
+)
 
-// Initialiser l'animation au montage
+// Redémarrer si les frames changent
+watch(
+  () => props.frames,
+  () => {
+    startAnimation()
+  },
+  { deep: true },
+)
+
 onMounted(() => {
-  if (props.frames.length > 0) {
-    currentFrame.value = props.frames[0];
-    startAnimation();
-  }
-});
+  startAnimation()
+})
 
-// Nettoyer à la destruction
-onUnmounted(() => {
-  stopAnimation();
-});
+onBeforeUnmount(() => {
+  stopAnimation()
+})
 </script>
 
 <style scoped>
@@ -102,12 +108,13 @@ onUnmounted(() => {
   display: inline-block;
 }
 
-.sprite-image {
-  width: 100px;
-  height: auto;
-}
-
 .flip-horizontal {
   transform: scaleX(-1);
+}
+
+.sprite-image {
+  display: block;
+  max-width: none;
+  height: auto;
 }
 </style>

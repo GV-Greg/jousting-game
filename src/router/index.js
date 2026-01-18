@@ -1,38 +1,28 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 
-import Home from '../views/Home.vue';
-import CharacterSelection from '../views/CharacterSelect.vue';
-import Game from '../views/Game.vue';
-import Rules from '../views/Rules.vue';
+import Rules from '@/views/RulesView.vue'
 
 // Configuration des routes
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
-    meta: {
-      title: 'Accueil - Jeu de Joutes',
-      requiresAuth: false
-    }
+    component: () => import('@/views/HomeView.vue'),
   },
   {
     path: '/select',
-    name: 'character-selection',
-    component: CharacterSelection,
-    meta: {
-      title: 'Sélection du Chevalier - Jeu de Joutes',
-      requiresAuth: false
-    }
+    name: 'select',
+    component: () => import('@/views/CharacterSelect.vue'),
+  },
+  {
+    path: '/customize',
+    name: 'customize',
+    component: () => import('@/views/CharacterCustomize.vue'),
   },
   {
     path: '/game',
     name: 'game',
-    component: Game,
-    meta: {
-      title: 'En jeu - Jeu de Joutes',
-      requiresAuth: false
-    }
+    component: () => import('@/views/GameView.vue'),
   },
   {
     path: '/rules',
@@ -40,42 +30,30 @@ const routes = [
     component: Rules,
     meta: {
       title: 'Règles du jeu - Jeu de Joutes',
-      requiresAuth: false
-    }
+      requiresAuth: false,
+    },
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: () => import('@/views/SettingsView.vue'),
+  },
+  {
+    path: '/customize',
+    name: 'customize',
+    component: () => import('@/views/CharacterCustomize.vue'),
   },
   // Route pour la gestion des pages non trouvées
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    redirect: { name: 'home' }
-  }
-];
+    redirect: { name: 'home' },
+  },
+]
 
-// Création du routeur
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  // Comportement de défilement lors de la navigation
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition;
-    } else {
-      return { top: 0 };
-    }
-  }
-});
+})
 
-// Navigation Guards (middleware)
-router.beforeEach((to, from, next) => {
-  // Mise à jour du titre de la page
-  document.title = to.meta.title || 'Jeu de Joutes Médiévales';
-
-  // Vous pouvez ajouter d'autres logiques ici, comme:
-  // - Vérification d'authentification
-  // - Redirection basée sur l'état du jeu
-  // - Tracking/analytics
-
-  next();
-});
-
-export default router;
+export default router

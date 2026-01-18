@@ -1,8 +1,8 @@
-@import "tailwindcss";
-@import './base.css';
-
 /* Polices personnalisées */
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+@import "tailwindcss";
+@import './base.css';
 
 /* Structure des layers:
  * - base: styles fondamentaux et réinitialisations
