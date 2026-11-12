@@ -40,7 +40,7 @@ const knights = [
 const selectedDifficulty = ref(null)
 const difficulties = [
   { value: 'easy', label: 'Écuyer', color: 'green', aiColor: 'green' },
-  { value: 'medium', label: 'Chevalier', color: 'yellow', aiColor: 'yellow' },
+  { value: 'normal', label: 'Chevalier', color: 'yellow', aiColor: 'yellow' },
   { value: 'hard', label: 'Champion', color: 'purple', aiColor: 'purple' },
 ]
 
@@ -78,7 +78,7 @@ const startGame = () => {
   // L'IA a un nom et une couleur selon la difficulté
   const aiNames = {
     easy: 'Écuyer Novice',
-    medium: 'Chevalier Errant',
+    normal: 'Chevalier Errant',
     hard: 'Champion du Roi',
   }
 

@@ -70,7 +70,7 @@
   .med-btn {
     @apply flex items-center justify-center px-4 py-2 rounded-lg border-2 transition-all duration-300 cursor-pointer text-base relative shadow-md;
     color: #f4e5c3; /* A parchment-like off-white */
-    font-family: 'Goudy Bookletter 1911', serif; /* A font with an old-style feel */
+    font-family: var(--font-medieval);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
     transform-style: preserve-3d;
   }

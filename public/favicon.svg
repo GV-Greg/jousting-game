@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#1a1a2e"/>
+  <!-- Crossed lances -->
+  <line x1="6" y1="6" x2="26" y2="26" stroke="#c09c27" stroke-width="3" stroke-linecap="round"/>
+  <line x1="26" y1="6" x2="6" y2="26" stroke="#8B0000" stroke-width="3" stroke-linecap="round"/>
+  <!-- Lance tips -->
+  <polygon points="6,6 10,8 8,10" fill="#c09c27"/>
+  <polygon points="26,6 22,8 24,10" fill="#8B0000"/>
+</svg>
