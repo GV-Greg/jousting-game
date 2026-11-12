@@ -737,41 +737,127 @@ const player2BadgeColor = computed(() => {
 
     <!-- Terrain de joute -->
     <div
-      class="w-full max-w-4xl h-56 bg-gradient-to-b from-sky-400 via-sky-300 to-sky-200 relative rounded-lg overflow-hidden border-4 border-amber-900"
+      class="w-full max-w-4xl h-56 relative rounded-lg overflow-hidden border-4 border-amber-900 shadow-2xl"
     >
-      <!-- Ciel avec nuages -->
+      <!-- Ciel atmosphérique -->
+      <div class="absolute inset-0 bg-gradient-to-b from-indigo-900 via-sky-500 to-amber-100"></div>
+
+      <!-- Brume à l'horizon -->
+      <div
+        class="absolute top-[28%] left-0 right-0 h-16 pointer-events-none"
+        style="background: linear-gradient(to bottom, transparent, rgba(254,243,199,0.35)); filter: blur(6px);"
+      ></div>
+
+      <!-- Nuages -->
       <div class="absolute top-2 left-10 w-14 h-4 bg-white/50 rounded-full blur-sm"></div>
       <div class="absolute top-4 right-20 w-16 h-5 bg-white/40 rounded-full blur-sm"></div>
-      <div class="absolute top-2 left-1/3 w-12 h-3 bg-white/30 rounded-full blur-sm"></div>
+      <div class="absolute top-2 left-1/3 w-12 h-3 bg-white/35 rounded-full blur-sm"></div>
 
-      <!-- Piste de sable - à partir de 50% (niveau de la lice) -->
-      <div
-        class="absolute top-[50%] bottom-0 left-0 right-0 bg-gradient-to-b from-amber-500 via-amber-600 to-amber-700"
-      ></div>
-
-      <!-- Lice (barrière horizontale) - à 50% -->
-      <div class="absolute left-0 right-0 top-[48%] z-10 pointer-events-none">
-        <div
-          class="w-full h-2 bg-gradient-to-b from-amber-400 via-amber-600 to-amber-800 shadow-md"
-        ></div>
+      <!-- Château distant (silhouette) -->
+      <div class="absolute top-[3%] left-1/2 -translate-x-1/2 w-28 pointer-events-none" style="opacity: 0.18;">
+        <svg viewBox="0 0 120 55" xmlns="http://www.w3.org/2000/svg" fill="#0f172a">
+          <rect x="40" y="20" width="40" height="35"/>
+          <rect x="37" y="12" width="8" height="10"/><rect x="49" y="10" width="8" height="12"/>
+          <rect x="61" y="12" width="8" height="10"/><rect x="73" y="10" width="8" height="12"/>
+          <rect x="18" y="24" width="24" height="31"/><rect x="16" y="17" width="6" height="8"/>
+          <rect x="24" y="15" width="6" height="10"/><rect x="32" y="17" width="6" height="8"/>
+          <rect x="78" y="24" width="24" height="31"/><rect x="78" y="17" width="6" height="8"/>
+          <rect x="86" y="15" width="6" height="10"/><rect x="94" y="17" width="6" height="8"/>
+          <rect x="58" y="4" width="2" height="12"/>
+          <polygon points="60,4 70,8 60,12" fill="#8B0000"/>
+        </svg>
       </div>
 
-      <!-- Poteaux de la lice -->
+      <!-- Tribunes gauche -->
+      <div class="absolute top-[7%] left-0 w-[18%] h-[40%] pointer-events-none" style="opacity: 0.65;">
+        <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="22" width="100" height="38" fill="#5a3a1a"/>
+          <rect x="0" y="22" width="100" height="8" fill="#7a4a1a"/>
+          <rect x="0" y="32" width="100" height="8" fill="#6a3a1a"/>
+          <ellipse cx="10" cy="21" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="22" cy="18" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="34" cy="21" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="46" cy="17" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="58" cy="20" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="70" cy="18" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="82" cy="21" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="94" cy="17" rx="5" ry="6" fill="#1a0a00"/>
+          <rect x="0" y="14" width="100" height="8" fill="#8B4513"/>
+          <rect x="0" y="12" width="100" height="2" fill="#c08020"/>
+        </svg>
+      </div>
+
+      <!-- Tribunes droite -->
+      <div class="absolute top-[7%] right-0 w-[18%] h-[40%] pointer-events-none" style="opacity: 0.65;">
+        <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="22" width="100" height="38" fill="#5a3a1a"/>
+          <rect x="0" y="22" width="100" height="8" fill="#7a4a1a"/>
+          <rect x="0" y="32" width="100" height="8" fill="#6a3a1a"/>
+          <ellipse cx="10" cy="21" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="22" cy="18" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="34" cy="21" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="46" cy="17" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="58" cy="20" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="70" cy="18" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="82" cy="21" rx="5" ry="6" fill="#1a0a00"/>
+          <ellipse cx="94" cy="17" rx="5" ry="6" fill="#1a0a00"/>
+          <rect x="0" y="14" width="100" height="8" fill="#8B4513"/>
+          <rect x="0" y="12" width="100" height="2" fill="#c08020"/>
+        </svg>
+      </div>
+
+      <!-- Piste de sable -->
       <div
-        class="absolute left-[10%] top-[50%] transform -translate-y-1/2 w-2 h-8 bg-amber-700 rounded-sm z-10"
+        class="absolute top-[50%] bottom-0 left-0 right-0 bg-gradient-to-b from-amber-300 via-amber-500 to-amber-700"
       ></div>
-      <div
-        class="absolute left-[30%] top-[50%] transform -translate-y-1/2 w-2 h-8 bg-amber-700 rounded-sm z-10"
-      ></div>
-      <div
-        class="absolute left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 w-3 h-10 bg-amber-600 rounded-sm z-10"
-      ></div>
-      <div
-        class="absolute left-[70%] top-[50%] transform -translate-y-1/2 w-2 h-8 bg-amber-700 rounded-sm z-10"
-      ></div>
-      <div
-        class="absolute left-[90%] top-[50%] transform -translate-y-1/2 w-2 h-8 bg-amber-700 rounded-sm z-10"
-      ></div>
+      <!-- Traces de sabots (lignes de profondeur) -->
+      <div class="absolute top-[55%] left-0 right-0 h-px bg-amber-900/35 pointer-events-none"></div>
+      <div class="absolute top-[72%] left-0 right-0 h-px bg-amber-900/25 pointer-events-none"></div>
+
+      <!-- Lice (barrière renforcée) -->
+      <div class="absolute left-0 right-0 top-[47%] z-10 pointer-events-none">
+        <div
+          class="w-full h-3 shadow-lg"
+          style="background: linear-gradient(to bottom, #fcd34d 0%, #b45309 50%, #78350f 100%); box-shadow: 0 2px 4px rgba(0,0,0,0.5);"
+        ></div>
+        <div class="w-full h-1 bg-amber-950/50 mt-px"></div>
+      </div>
+
+      <!-- Poteaux de la lice avec pennons -->
+      <!-- Poteau 10% - pennon rouge -->
+      <div class="absolute z-10" style="left: 10%; top: 32%; transform: translateX(-50%);">
+        <div class="absolute" style="top: -11px; left: 10px; width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 15px solid #dc2626;"></div>
+        <div class="w-2.5 rounded-sm shadow-md" style="height: 68px; background: linear-gradient(to right, #fbbf24, #92400e, #78350f);"></div>
+        <div class="absolute rounded-sm" style="top: -3px; left: -3px; width: 16px; height: 6px; background: #fcd34d;"></div>
+      </div>
+
+      <!-- Poteau 30% - pennon bleu -->
+      <div class="absolute z-10" style="left: 30%; top: 32%; transform: translateX(-50%);">
+        <div class="absolute" style="top: -11px; left: 10px; width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 15px solid #2563eb;"></div>
+        <div class="w-2.5 rounded-sm shadow-md" style="height: 68px; background: linear-gradient(to right, #fbbf24, #92400e, #78350f);"></div>
+        <div class="absolute rounded-sm" style="top: -3px; left: -3px; width: 16px; height: 6px; background: #fcd34d;"></div>
+      </div>
+
+      <!-- Poteau central 50% - pennon doré (plus grand) -->
+      <div class="absolute z-10" style="left: 50%; top: 29%; transform: translateX(-50%);">
+        <div class="absolute" style="top: -13px; left: 12px; width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 18px solid #c09c27;"></div>
+        <div class="w-3 rounded-sm shadow-md" style="height: 76px; background: linear-gradient(to right, #fcd34d, #92400e, #78350f);"></div>
+        <div class="absolute rounded-sm" style="top: -4px; left: -4px; width: 20px; height: 7px; background: #fef08a;"></div>
+      </div>
+
+      <!-- Poteau 70% - pennon rouge -->
+      <div class="absolute z-10" style="left: 70%; top: 32%; transform: translateX(-50%);">
+        <div class="absolute" style="top: -11px; left: 10px; width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 15px solid #dc2626;"></div>
+        <div class="w-2.5 rounded-sm shadow-md" style="height: 68px; background: linear-gradient(to right, #fbbf24, #92400e, #78350f);"></div>
+        <div class="absolute rounded-sm" style="top: -3px; left: -3px; width: 16px; height: 6px; background: #fcd34d;"></div>
+      </div>
+
+      <!-- Poteau 90% - pennon bleu -->
+      <div class="absolute z-10" style="left: 90%; top: 32%; transform: translateX(-50%);">
+        <div class="absolute" style="top: -11px; left: 10px; width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 15px solid #2563eb;"></div>
+        <div class="w-2.5 rounded-sm shadow-md" style="height: 68px; background: linear-gradient(to right, #fbbf24, #92400e, #78350f);"></div>
+        <div class="absolute rounded-sm" style="top: -3px; left: -3px; width: 16px; height: 6px; background: #fcd34d;"></div>
+      </div>
 
       <!-- Effet d'impact au centre -->
       <div
