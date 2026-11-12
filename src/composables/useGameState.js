@@ -17,7 +17,7 @@ export const useGameState = defineStore('game', () => {
     isPaused: false,
     gameOver: false,
     winner: null, // 'player' ou 'ai'
-    difficulty: 'medium' // 'easy', 'medium', 'hard'
+    difficulty: 'normal' // 'easy', 'normal', 'hard'
   })
 
   // État du joueur
