@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useSettingsStore } from '@/stores/settingsStore'
 import BaseButton from '@/components/BaseButton.vue'
+import arenaBackground from '@/assets/arena-bg.png'
 
 const router = useRouter()
 const settingsStore = useSettingsStore()
@@ -13,7 +14,7 @@ const difficulty = ref(settingsStore.defaultDifficulty)
 
 const difficulties = [
   { value: 'easy', label: 'Facile' },
-  { value: 'medium', label: 'Normal' },
+  { value: 'normal', label: 'Normal' },
   { value: 'hard', label: 'Difficile' },
 ]
 
@@ -31,9 +32,11 @@ const goBack = () => {
 
 <template>
   <div
-    class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col items-center justify-center p-4"
+    class="min-h-screen flex flex-col items-center justify-center p-4 relative bg-cover bg-center"
+    :style="{ backgroundImage: `url(${arenaBackground})` }"
   >
-    <div class="bg-gray-800 p-8 rounded-lg border-2 border-amber-700 max-w-md w-full">
+    <div class="absolute inset-0 bg-black/80 z-0"></div>
+    <div class="relative z-10 p-8 rounded-xl max-w-md w-full" style="background: rgba(15,8,2,0.85); border: 1px solid rgba(146,64,14,0.5); border-top: 2px solid rgba(217,119,6,0.4);">
       <h1 class="text-3xl font-medieval text-amber-400 text-center mb-8">Paramètres</h1>
 
       <!-- Son -->
@@ -73,3 +76,4 @@ const goBack = () => {
     </div>
   </div>
 </template>
+

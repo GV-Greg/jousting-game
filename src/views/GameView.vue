@@ -690,7 +690,7 @@ const player2BadgeColor = computed(() => {
 
 <template>
   <div
-    class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 flex flex-col items-center justify-center p-4"
+    class="min-h-screen flex flex-col items-center justify-center p-4" style="background: linear-gradient(to bottom, #0d0a05, #1a1008, #0d0a05);"
     :class="{ 'animate-shake': screenShake }"
   >
     <!-- En-tête du jeu -->

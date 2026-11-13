@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import arenaBackground from '@/assets/arena-bg.png'
 import { useGameStore } from '@/stores/gameStore'
 import { useSettingsStore } from '@/stores/settingsStore'
 import BaseButton from '@/components/BaseButton.vue'
@@ -124,8 +125,12 @@ const getBarColor = (color) =>
 
 <template>
   <div
-    class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 flex flex-col items-center p-4 overflow-y-auto"
+    class="min-h-screen flex flex-col items-center p-4 overflow-y-auto relative bg-cover bg-center"
+    :style="{ backgroundImage: `url(${arenaBackground})` }"
   >
+    <!-- Overlay sombre -->
+    <div class="absolute inset-0 bg-black/80 z-0"></div>
+
     <!-- Toast -->
     <ToastNotification
       :show="toastState.show"
@@ -135,14 +140,17 @@ const getBarColor = (color) =>
       @close="hideToast"
     />
 
+    <!-- Contenu principal -->
+    <div class="relative z-10 flex flex-col items-center w-full">
+
     <!-- Titre -->
     <div class="text-center mb-6">
-      <h1 class="text-4xl font-medieval text-amber-400 mb-2">Choisissez votre Champion</h1>
-      <p class="text-gray-400">Sélectionnez votre chevalier</p>
+      <h1 class="text-4xl font-medieval text-amber-400 mb-2 drop-shadow-lg">Choisissez votre Champion</h1>
+      <p class="text-amber-200/60 text-sm font-body italic">Sélectionnez votre chevalier</p>
     </div>
 
     <!-- Sélection de la difficulté -->
-    <div class="mb-6 bg-gray-800/50 p-4 rounded-xl border border-gray-700">
+    <div class="mb-6 p-4 rounded-xl" style="background: rgba(15,8,2,0.75); border: 1px solid rgba(146,64,14,0.5); border-top: 2px solid rgba(217,119,6,0.4);">
       <h2 class="text-lg text-amber-300 text-center mb-3 font-medieval">Niveau de l'Adversaire</h2>
       <div class="flex gap-3">
         <button
@@ -162,7 +170,7 @@ const getBarColor = (color) =>
     </div>
 
     <!-- Cartes des chevaliers -->
-    <div class="flex gap-6 mb-6">
+    <div class="flex flex-wrap gap-6 justify-center mb-6">
       <div
         v-for="knight in knights"
         :key="knight.id"
@@ -200,7 +208,7 @@ const getBarColor = (color) =>
         </div>
 
         <!-- Corps de la carte -->
-        <div class="bg-gray-800 p-4">
+        <div class="p-4" style="background: rgba(12,6,2,0.92);">
           <h3
             class="text-xl font-medieval text-center mb-4"
             :class="knight.color === 'red' ? 'text-red-400' : 'text-blue-400'"
@@ -264,6 +272,8 @@ const getBarColor = (color) =>
       />
       <BaseButton @click="goBack" text="Retour" color="red" icon="bi-arrow-left" />
     </div>
+
+    </div><!-- /z-10 -->
   </div>
 </template>
 

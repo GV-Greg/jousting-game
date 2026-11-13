@@ -28,7 +28,7 @@ const settingsStore = useSettingsStore()
 const difficultyLabel = computed(() => {
   const labels = {
     easy: 'Facile',
-    medium: 'Normal',
+    normal: 'Normal',
     hard: 'Difficile',
   }
   return labels[settingsStore.defaultDifficulty] || 'Normal'

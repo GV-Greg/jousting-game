@@ -1,5 +1,5 @@
 /* Polices personnalisées */
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=IM+Fell+English:ital@0;1&display=swap');
 
 @import "tailwindcss";
 @import './base.css';
@@ -18,6 +18,9 @@
     --medieval-brown: #8B4513;
     --medieval-gray: #2F4F4F;
     --font-medieval: 'MedievalSharp', cursive;
+    --font-body: 'IM Fell English', Georgia, serif;
+    --parchment: #f0e0b0;
+    --parchment-muted: #c8a86a;
   }
 
   html, body {
@@ -37,10 +40,13 @@
   }
 
   body {
-    background-color: #111827;
-    color: #f3f4f6;
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
+    background-color: #0d0a07;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 31px, rgba(255,255,255,0.015) 31px, rgba(255,255,255,0.015) 32px),
+      repeating-linear-gradient(90deg, transparent, transparent 31px, rgba(255,255,255,0.015) 31px, rgba(255,255,255,0.015) 32px);
+    color: var(--parchment);
+    font-family: var(--font-body);
+    line-height: 1.65;
     min-height: 100vh;
   }
 
@@ -59,6 +65,10 @@
   .font-medieval {
     font-family: var(--font-medieval);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
   }
 
   .icon {
@@ -113,19 +123,23 @@
   
   .med-btn-gold {
     background-color: var(--medieval-gold);
+    border-color: #a67c52;
     text-shadow: 1px 1px 0px #a67c52;
     box-shadow: 2px 2px 0px #a67c52;
   }
-  
+
   .med-btn-red {
     background-color: var(--medieval-red);
+    border-color: #a52a2a;
     text-shadow: 1px 1px 0px #a52a2a;
     box-shadow: 2px 2px 0px #a52a2a;
   }
+
   .med-btn-blue {
     background-color: var(--medieval-blue);
+    border-color: #002244;
     text-shadow: 1px 1px 0px #003366;
-    box-shadow: 2px 2px 0px #003366;
+    box-shadow: 2px 2px 0px #002244;
   }
 
   .med-btn-brown {
@@ -297,6 +311,14 @@
 }
 
 @layer utilities {
+  .text-parchment {
+    color: var(--parchment);
+  }
+
+  .text-parchment-muted {
+    color: var(--parchment-muted);
+  }
+
   .bg-medieval-gold {
     background-color: var(--medieval-gold);
   }
