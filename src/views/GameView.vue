@@ -12,6 +12,7 @@ import {
 } from '@/engine/joustEngine'
 import BaseButton from '@/components/BaseButton.vue'
 import JousterSprite from '@/components/JousterSprite.vue'
+import arenaBackground from '@/assets/arena-bg.png'
 
 const router = useRouter()
 const gameStore = useGameStore()
@@ -690,47 +691,44 @@ const player2BadgeColor = computed(() => {
 
 <template>
   <div
-    class="min-h-screen flex flex-col items-center justify-center p-4" style="background: linear-gradient(to bottom, #0d0a05, #1a1008, #0d0a05);"
+    class="min-h-screen flex flex-col items-center justify-center p-4 relative bg-cover bg-center"
+    :style="{ backgroundImage: `url(${arenaBackground})` }"
     :class="{ 'animate-shake': screenShake }"
   >
-    <!-- En-tête du jeu -->
-    <div class="w-full max-w-4xl mb-4 flex justify-between items-center text-white">
-      <div class="flex items-center">
-        <div class="bg-red-900 p-2 rounded-lg mr-4">
-          <span class="font-medieval">Joueur 1: {{ scores.player1 }}/3</span>
-        </div>
-        <div class="flex flex-col">
-          <span class="text-xs text-gray-400">Endurance</span>
-          <div class="h-3 w-24 bg-gray-700 rounded-full overflow-hidden">
-            <div
-              class="h-full bg-red-600 transition-all"
-              :style="{ width: `${gameStore.player1.endurance}%` }"
-            ></div>
+    <div class="absolute inset-0 bg-black/75 z-0"></div>
+    <div class="relative z-10 w-full flex flex-col items-center justify-center">
+    <!-- Bannière héraldique du tournoi -->
+    <div class="w-full max-w-4xl mb-4">
+      <div class="flex items-stretch gap-1.5">
+        <!-- Blason rouge — Joueur -->
+        <div class="flex-1 py-2 px-3" style="background: linear-gradient(135deg, rgba(80,10,0,0.9), rgba(50,5,0,0.95)); border: 1px solid rgba(220,38,38,0.35); border-top: 2px solid rgba(248,113,113,0.5);">
+          <div class="font-medieval text-sm text-red-300 truncate leading-tight">{{ player1Label }}</div>
+          <div class="flex gap-1 my-1">
+            <span v-for="i in 3" :key="i" class="text-base" :class="i <= scores.player1 ? 'text-amber-400' : 'text-gray-700'">⚜</span>
+          </div>
+          <div class="text-[10px] text-amber-800 font-medieval mb-0.5">Vigueur</div>
+          <div class="h-1.5 bg-gray-900 overflow-hidden" style="border: 1px solid rgba(146,64,14,0.4);">
+            <div class="h-full transition-all" style="background: linear-gradient(to right, #991b1b, #ef4444);" :style="{ width: `${gameStore.player1.endurance}%` }"></div>
           </div>
         </div>
-      </div>
 
-      <div class="text-center">
-        <h2 class="font-medieval text-xl text-yellow-400">
-          Passe {{ joustState.currentPass + 1 }}
-        </h2>
-        <span class="text-sm text-gray-400">{{
-          joustState.player1Side === 'left' ? '← Vous' : 'Vous →'
-        }}</span>
-      </div>
-
-      <div class="flex items-center">
-        <div class="flex flex-col items-end">
-          <span class="text-xs text-gray-400">Endurance</span>
-          <div class="h-3 w-24 bg-gray-700 rounded-full overflow-hidden">
-            <div
-              class="h-full bg-blue-600 transition-all"
-              :style="{ width: `${gameStore.player2.endurance}%` }"
-            ></div>
-          </div>
+        <!-- Parchemin central — Proclamation -->
+        <div class="text-center px-3 py-2 flex flex-col justify-center" style="background: linear-gradient(to bottom, rgba(50,20,0,0.95), rgba(25,10,0,0.98)); border: 1px solid rgba(192,156,39,0.5); border-top: 2px solid rgba(192,156,39,0.8); min-width: 130px;">
+          <div class="text-amber-600/70 text-[9px] font-medieval tracking-wider mb-0.5">⚜ TOURNOI ROYAL ⚜</div>
+          <div class="font-medieval text-2xl text-amber-400 leading-none">Passe {{ joustState.currentPass + 1 }}</div>
+          <div class="text-[10px] text-amber-700 font-body italic mt-1">{{ joustState.player1Side === 'left' ? '← Vous' : 'Vous →' }}</div>
         </div>
-        <div class="bg-blue-900 p-2 rounded-lg ml-4">
-          <span class="font-medieval">IA: {{ scores.player2 }}/3</span>
+
+        <!-- Blason bleu — IA -->
+        <div class="flex-1 py-2 px-3 text-right" style="background: linear-gradient(225deg, rgba(0,20,80,0.9), rgba(0,10,50,0.95)); border: 1px solid rgba(37,99,235,0.35); border-top: 2px solid rgba(96,165,250,0.5);">
+          <div class="font-medieval text-sm text-blue-300 truncate leading-tight">{{ player2Label }}</div>
+          <div class="flex gap-1 my-1 justify-end">
+            <span v-for="i in 3" :key="i" class="text-base" :class="i <= scores.player2 ? 'text-amber-400' : 'text-gray-700'">⚜</span>
+          </div>
+          <div class="text-[10px] text-amber-800 font-medieval mb-0.5">Vigueur</div>
+          <div class="h-1.5 bg-gray-900 overflow-hidden" style="border: 1px solid rgba(146,64,14,0.4);">
+            <div class="h-full transition-all" style="background: linear-gradient(to right, #1d4ed8, #3b82f6);" :style="{ width: `${gameStore.player2.endurance}%` }"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -814,49 +812,32 @@ const player2BadgeColor = computed(() => {
       <div class="absolute top-[55%] left-0 right-0 h-px bg-amber-900/35 pointer-events-none"></div>
       <div class="absolute top-[72%] left-0 right-0 h-px bg-amber-900/25 pointer-events-none"></div>
 
-      <!-- Lice (barrière renforcée) -->
-      <div class="absolute left-0 right-0 top-[47%] z-10 pointer-events-none">
-        <div
-          class="w-full h-3 shadow-lg"
-          style="background: linear-gradient(to bottom, #fcd34d 0%, #b45309 50%, #78350f 100%); box-shadow: 0 2px 4px rgba(0,0,0,0.5);"
-        ></div>
-        <div class="w-full h-1 bg-amber-950/50 mt-px"></div>
-      </div>
-
-      <!-- Poteaux de la lice avec pennons -->
-      <!-- Poteau 10% - pennon rouge -->
-      <div class="absolute z-10" style="left: 10%; top: 32%; transform: translateX(-50%);">
-        <div class="absolute" style="top: -11px; left: 10px; width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 15px solid #dc2626;"></div>
-        <div class="w-2.5 rounded-sm shadow-md" style="height: 68px; background: linear-gradient(to right, #fbbf24, #92400e, #78350f);"></div>
-        <div class="absolute rounded-sm" style="top: -3px; left: -3px; width: 16px; height: 6px; background: #fcd34d;"></div>
-      </div>
-
-      <!-- Poteau 30% - pennon bleu -->
-      <div class="absolute z-10" style="left: 30%; top: 32%; transform: translateX(-50%);">
-        <div class="absolute" style="top: -11px; left: 10px; width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 15px solid #2563eb;"></div>
-        <div class="w-2.5 rounded-sm shadow-md" style="height: 68px; background: linear-gradient(to right, #fbbf24, #92400e, #78350f);"></div>
-        <div class="absolute rounded-sm" style="top: -3px; left: -3px; width: 16px; height: 6px; background: #fcd34d;"></div>
-      </div>
-
-      <!-- Poteau central 50% - pennon doré (plus grand) -->
-      <div class="absolute z-10" style="left: 50%; top: 29%; transform: translateX(-50%);">
-        <div class="absolute" style="top: -13px; left: 12px; width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 18px solid #c09c27;"></div>
-        <div class="w-3 rounded-sm shadow-md" style="height: 76px; background: linear-gradient(to right, #fcd34d, #92400e, #78350f);"></div>
-        <div class="absolute rounded-sm" style="top: -4px; left: -4px; width: 20px; height: 7px; background: #fef08a;"></div>
-      </div>
-
-      <!-- Poteau 70% - pennon rouge -->
-      <div class="absolute z-10" style="left: 70%; top: 32%; transform: translateX(-50%);">
-        <div class="absolute" style="top: -11px; left: 10px; width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 15px solid #dc2626;"></div>
-        <div class="w-2.5 rounded-sm shadow-md" style="height: 68px; background: linear-gradient(to right, #fbbf24, #92400e, #78350f);"></div>
-        <div class="absolute rounded-sm" style="top: -3px; left: -3px; width: 16px; height: 6px; background: #fcd34d;"></div>
-      </div>
-
-      <!-- Poteau 90% - pennon bleu -->
-      <div class="absolute z-10" style="left: 90%; top: 32%; transform: translateX(-50%);">
-        <div class="absolute" style="top: -11px; left: 10px; width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 15px solid #2563eb;"></div>
-        <div class="w-2.5 rounded-sm shadow-md" style="height: 68px; background: linear-gradient(to right, #fbbf24, #92400e, #78350f);"></div>
-        <div class="absolute rounded-sm" style="top: -3px; left: -3px; width: 16px; height: 6px; background: #fcd34d;"></div>
+      <!-- Tilt central — lice de joute : poteaux verticaux + 2 rails, hauteur ventre cheval -->
+      <div class="absolute left-0 right-0 z-10 pointer-events-none" style="top: 46%;">
+        <!-- Pennons au-dessus du rail (rouge jouer 1, doré central, bleu joueur 2) -->
+        <div class="absolute" style="top: -18px; left: 20%; transform: translateX(-50%);">
+          <div style="width: 2px; height: 18px; background: #5a2008;"></div>
+          <div class="absolute" style="top: 0; left: 2px; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 10px solid #9B0000;"></div>
+        </div>
+        <div class="absolute" style="top: -22px; left: 50%; transform: translateX(-50%);">
+          <div style="width: 3px; height: 22px; background: linear-gradient(to right, #5a2008, #8B4513, #5a2008);"></div>
+          <div class="absolute" style="top: 0; left: 3px; width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 13px solid #c09c27;"></div>
+        </div>
+        <div class="absolute" style="top: -18px; left: 80%; transform: translateX(-50%);">
+          <div style="width: 2px; height: 18px; background: #5a2008;"></div>
+          <div class="absolute" style="top: 0; left: 2px; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 10px solid #1d4ed8;"></div>
+        </div>
+        <!-- Lice : 2 rails + poteaux verticaux entre eux (hauteur ventre cheval) -->
+        <div class="relative w-full" style="height: 16px;">
+          <!-- Rail supérieur -->
+          <div class="absolute top-0 w-full" style="height: 3px; background: linear-gradient(to bottom, #9B4515, #6B2808, #8B4513); box-shadow: 0 1px 2px rgba(0,0,0,0.5);"></div>
+          <!-- Fond sombre entre les 2 rails -->
+          <div class="absolute w-full" style="top: 3px; bottom: 3px; background: rgba(0,0,0,0.6);"></div>
+          <!-- Poteaux verticaux simulés par gradient répétitif -->
+          <div class="absolute w-full" style="top: 3px; bottom: 3px; background: repeating-linear-gradient(90deg, #6B2808 0px, #9B4513 1px, #9B4513 5px, #5a2008 6px, transparent 6px, transparent 12px);"></div>
+          <!-- Rail inférieur -->
+          <div class="absolute bottom-0 w-full" style="height: 3px; background: linear-gradient(to bottom, #6B2808, #3a1000, #5a2008); box-shadow: 0 2px 5px rgba(0,0,0,0.6);"></div>
+        </div>
       </div>
 
       <!-- Effet d'impact au centre -->
@@ -933,33 +914,62 @@ const player2BadgeColor = computed(() => {
       />
     </div>
 
-    <!-- Overlay des résultats -->
-    <div v-if="showResults" class="fixed inset-0 flex items-center justify-center z-50 bg-black/70">
+    <!-- Parchemin des résultats -->
+    <div v-if="showResults" class="fixed inset-0 flex items-center justify-center z-50 bg-black/75">
       <div
-        class="bg-gradient-to-b from-gray-800 to-gray-900 p-6 rounded-lg text-center border-2 border-amber-700 max-w-md w-full shadow-xl"
+        class="p-6 text-center max-w-md w-full relative"
+        style="
+          background: radial-gradient(ellipse at 50% 0%, rgba(45,18,2,0.98) 0%, rgba(12,4,1,0.995) 100%);
+          box-shadow:
+            0 0 0 2px rgba(192,156,39,0.85),
+            0 0 0 5px rgba(5,2,0,0.98),
+            0 0 0 7px rgba(192,156,39,0.45),
+            0 0 0 9px rgba(0,0,0,0.65),
+            0 40px 100px rgba(0,0,0,0.98);
+        "
       >
-        <h3 class="text-3xl font-medieval text-amber-400 mb-4">{{ roundResultMessage }}</h3>
+        <!-- Coins ornementaux -->
+        <div class="absolute pointer-events-none" style="top: 8px; left: 8px; width: 24px; height: 24px; border-top: 2px solid rgba(192,156,39,0.9); border-left: 2px solid rgba(192,156,39,0.9);"></div>
+        <div class="absolute pointer-events-none" style="top: 8px; right: 8px; width: 24px; height: 24px; border-top: 2px solid rgba(192,156,39,0.9); border-right: 2px solid rgba(192,156,39,0.9);"></div>
+        <div class="absolute pointer-events-none" style="bottom: 8px; left: 8px; width: 24px; height: 24px; border-bottom: 2px solid rgba(192,156,39,0.9); border-left: 2px solid rgba(192,156,39,0.9);"></div>
+        <div class="absolute pointer-events-none" style="bottom: 8px; right: 8px; width: 24px; height: 24px; border-bottom: 2px solid rgba(192,156,39,0.9); border-right: 2px solid rgba(192,156,39,0.9);"></div>
+        <div class="text-amber-700/60 text-xs font-medieval mb-2 tracking-widest">— Résultat de la Passe —</div>
+        <h3 class="text-2xl font-medieval text-amber-400 mb-4">{{ roundResultMessage }}</h3>
 
-        <div class="mb-4 grid grid-cols-2 gap-4 text-white">
-          <div class="bg-red-900/50 p-2 rounded">
-            <div class="font-medieval">Joueur 1</div>
-            <div class="text-xl">{{ roundPoints.player1 }} pt</div>
-            <div class="mt-2 text-amber-400">Total: {{ scores.player1 }}/3</div>
-            <div class="text-xs text-gray-400">
-              Endurance: {{ Math.round(gameStore.player1.endurance) }}%
+        <div class="mb-4 grid grid-cols-2 gap-3">
+          <div class="p-3 text-center" style="background: rgba(80,10,0,0.6); border: 1px solid rgba(220,38,38,0.3); border-top: 2px solid rgba(248,113,113,0.4);">
+            <div class="font-medieval text-red-300 text-sm mb-1">{{ player1Label }}</div>
+            <div class="text-xl font-medieval text-parchment leading-tight">
+              <template v-if="passResult.player1Unhorse && !passResult.player2Unhorse">
+                <span class="text-amber-400 text-base">Désarçonnement !</span>
+              </template>
+              <template v-else>
+                {{ roundPoints.player1 }} <span class="text-sm text-parchment-muted">pt</span>
+              </template>
             </div>
+            <div class="flex justify-center gap-0.5 my-1">
+              <span v-for="i in 3" :key="i" class="text-xs" :class="i <= scores.player1 ? 'text-amber-400' : 'text-gray-700'">⚜</span>
+            </div>
+            <div class="text-[10px] text-amber-800 font-medieval">Vigueur : {{ Math.round(gameStore.player1.endurance) }}%</div>
           </div>
-          <div class="bg-blue-900/50 p-2 rounded">
-            <div class="font-medieval">IA</div>
-            <div class="text-xl">{{ roundPoints.player2 }} pt</div>
-            <div class="mt-2 text-amber-400">Total: {{ scores.player2 }}/3</div>
-            <div class="text-xs text-gray-400">
-              Endurance: {{ Math.round(gameStore.player2.endurance) }}%
+          <div class="p-3 text-center" style="background: rgba(0,20,80,0.6); border: 1px solid rgba(37,99,235,0.3); border-top: 2px solid rgba(96,165,250,0.4);">
+            <div class="font-medieval text-blue-300 text-sm mb-1">{{ player2Label }}</div>
+            <div class="text-xl font-medieval text-parchment leading-tight">
+              <template v-if="passResult.player2Unhorse && !passResult.player1Unhorse">
+                <span class="text-amber-400 text-base">Désarçonnement !</span>
+              </template>
+              <template v-else>
+                {{ roundPoints.player2 }} <span class="text-sm text-parchment-muted">pt</span>
+              </template>
             </div>
+            <div class="flex justify-center gap-0.5 my-1">
+              <span v-for="i in 3" :key="i" class="text-xs" :class="i <= scores.player2 ? 'text-amber-400' : 'text-gray-700'">⚜</span>
+            </div>
+            <div class="text-[10px] text-amber-800 font-medieval">Vigueur : {{ Math.round(gameStore.player2.endurance) }}%</div>
           </div>
         </div>
 
-        <div v-if="matchEnded" class="my-4 text-xl text-yellow-300 font-medieval">
+        <div v-if="matchEnded" class="my-4 text-xl text-yellow-300 font-medieval border-t border-amber-900/40 pt-4">
           {{ matchWinnerMessage }}
         </div>
 
@@ -981,6 +991,7 @@ const player2BadgeColor = computed(() => {
           <BaseButton @click="quitGame" text="Quitter" color="red" icon="bi-arrow-left" />
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>

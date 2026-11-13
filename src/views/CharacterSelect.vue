@@ -121,6 +121,33 @@ const getBarColor = (color) =>
     green: 'bg-green-500',
     cyan: 'bg-cyan-500',
   })[color] || 'bg-gray-500'
+
+const shieldBg = {
+  easy:   { base: 'rgba(5,46,22,0.9)',  active: 'rgba(21,128,61,0.9)'  },
+  normal: { base: 'rgba(69,26,3,0.9)',  active: 'rgba(180,83,9,0.9)'   },
+  hard:   { base: 'rgba(46,16,101,0.9)',active: 'rgba(126,34,206,0.9)' },
+}
+const shieldGlow = {
+  easy:   'drop-shadow(0 0 8px rgba(74,222,128,0.65))',
+  normal: 'drop-shadow(0 0 8px rgba(251,191,36,0.65))',
+  hard:   'drop-shadow(0 0 8px rgba(192,132,252,0.65))',
+}
+const getShieldStyle = (diff) => {
+  const isSelected = selectedDifficulty.value === diff.value
+  const bg = isSelected ? shieldBg[diff.value]?.active : shieldBg[diff.value]?.base
+  return {
+    clipPath: 'polygon(0% 0%, 100% 0%, 100% 65%, 50% 100%, 0% 65%)',
+    padding: '12px 20px 36px',
+    minWidth: '100px',
+    background: bg || 'rgba(40,20,5,0.9)',
+    filter: isSelected
+      ? (shieldGlow[diff.value] || 'drop-shadow(0 0 6px rgba(255,200,50,0.5))')
+      : 'drop-shadow(0 3px 5px rgba(0,0,0,0.6))',
+    border: 'none',
+    outline: 'none',
+    transition: 'filter 0.2s, transform 0.2s',
+  }
+}
 </script>
 
 <template>
@@ -152,18 +179,15 @@ const getBarColor = (color) =>
     <!-- Sélection de la difficulté -->
     <div class="mb-6 p-4 rounded-xl" style="background: rgba(15,8,2,0.75); border: 1px solid rgba(146,64,14,0.5); border-top: 2px solid rgba(217,119,6,0.4);">
       <h2 class="text-lg text-amber-300 text-center mb-3 font-medieval">Niveau de l'Adversaire</h2>
-      <div class="flex gap-3">
+      <div class="flex gap-5 justify-center">
         <button
           v-for="diff in difficulties"
           :key="diff.value"
-          class="px-5 py-2 rounded-lg border-2 transition-all font-bold min-w-[100px]"
-          :class="
-            selectedDifficulty === diff.value
-              ? `bg-${diff.color}-600/80 border-${diff.color}-400 text-white shadow-lg`
-              : 'border-gray-600 text-gray-400 hover:border-gray-500 hover:bg-gray-700/50'
-          "
+          class="font-medieval text-parchment text-sm cursor-pointer hover:-translate-y-1"
+          :style="getShieldStyle(diff)"
           @click="selectedDifficulty = diff.value"
         >
+          <span class="block text-amber-400/60 text-[10px] mb-1">⚜</span>
           {{ diff.label }}
         </button>
       </div>
@@ -277,29 +301,3 @@ const getBarColor = (color) =>
   </div>
 </template>
 
-<style scoped>
-.bg-green-600\/80 {
-  background-color: rgba(22, 163, 74, 0.8);
-}
-.border-green-400 {
-  border-color: rgb(74, 222, 128);
-}
-.bg-yellow-600\/80 {
-  background-color: rgba(202, 138, 4, 0.8);
-}
-.border-yellow-400 {
-  border-color: rgb(250, 204, 21);
-}
-.bg-purple-600\/80 {
-  background-color: rgba(147, 51, 234, 0.8);
-}
-.border-purple-400 {
-  border-color: rgb(192, 132, 252);
-}
-.bg-red-600\/80 {
-  background-color: rgba(220, 38, 38, 0.8);
-}
-.border-red-400 {
-  border-color: rgb(248, 113, 113);
-}
-</style>
